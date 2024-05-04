@@ -13,4 +13,4 @@ class Resistor:
             float: Power dissipation in Watts
         """
         power = current ** 2 * self.resistance
-        return power
+        return power  

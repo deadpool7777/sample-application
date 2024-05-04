@@ -9,7 +9,7 @@ class Circuit:
 
     def calculate_total_power(self, current, connection_type):
         total_power = 0
-        
+         
         if connection_type == 'series':
             total_power = sum(resistor.calculate_power_dissipation(current) for resistor in self.resistors)
         elif connection_type == 'parallel':

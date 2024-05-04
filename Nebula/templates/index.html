@@ -1,0 +1,31 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resistor Calculator</title>
+</head>
+<body>
+    <h1>Resistor Calculator</h1>
+    <form action="/add_resistor" method="post">
+        <label for="resistance">Enter Resistance Value (Ohms):</label>
+        <input type="number" id="resistance" name="resistance" required>
+        <button type="submit">Add Resistor</button>
+    </form>
+    <form action="/calculate" method="post">
+        <label for="current">Enter Current Value (Amperes):</label>
+        <input type="number" id="current" name="current" required>
+        <label for="connection_type">Select Connection Type:</label>
+        <select id="connection_type" name="connection_type">
+            <option value="series">Series</option>
+            <option value="parallel">Parallel</option>
+        </select>
+        <button type="submit">Calculate Total Power</button>
+    </form>
+    <a href="/calculate_series_resistance">Calculate Series Resistance</a>
+    <a href="/calculate_parallel_resistance">Calculate Parallel Resistance</a>
+    <p>{{ message }}</p>
+</body>
+</html>

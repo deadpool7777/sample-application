@@ -7,9 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Total Power Dissipation</title>
 </head>
+<script>
+    function clearComponentList() {
+        var componentList = document.getElementById("component-list");
+        while (componentList.firstChild) {
+            componentList.removeChild(componentList.firstChild);
+        }
+    }
+</script>
 <body>
     <h1>Total Power Dissipation</h1>
     <p>Total power dissipation in the circuit: {{ total_power }} Watts</p>
     <a href="/">Back to Calculator</a>
+    <br>
+    <h2>Component List</h2>
+        <ul id="component-list">
+            {% for component in components %}
+            <li><a href="#">{{ component.specifications }}</a></li>
+            {% endfor %}
+        </ul>
+    <button type="button" onclick="clearComponentList()">click to clear the component list</button>
 </body>
 </html>

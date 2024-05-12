@@ -6,11 +6,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Total Power Dissipation</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
 </head>
+<!-- <script>
+    // Clear the component list when the page is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        var componentList = document.getElementById('component-list');
+        while (componentList.firstChild) {
+            componentList.removeChild(componentList.firstChild);
+        }
+    });
+</script> -->
+<script>
+    function clearAll(){
+        var message = "components Deleted."
+        alert(message);
+    }
+</script>
+
 <script>
     function clearComponentList() {
         var componentList = document.getElementById("component-list");
         while (componentList.firstChild) {
+            // Component.query.delete()
             componentList.removeChild(componentList.firstChild);
         }
     }
@@ -23,9 +41,13 @@
     <h2>Component List</h2>
         <ul id="component-list">
             {% for component in components %}
-            <li><a href="#">{{ component.specifications }}</a></li>
+            <li>{{ component.specifications }}</li>
             {% endfor %}
         </ul>
-    <button type="button" onclick="clearComponentList()">click to clear the component list</button>
+        <form action="/delete_all_components" method="post">
+        <button style="background-color: hsl(0, 99%, 32%);padding: 10px 20px;color: #fff;border-radius: 4px;
+        cursor: pointer;" type="submit" onclick="clearAll()">click to clear the component list</button>
+    <!-- <button type="button" onclick="clearComponentList()">click to clear the component list</button> -->
+</form>
 </body>
 </html>

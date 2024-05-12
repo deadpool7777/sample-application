@@ -12,8 +12,8 @@ db = SQLAlchemy(app)
 
 class Component(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String(50), nullable=False)
-    specifications = db.Column(db.String(255))
+    type = db.Column(db.String(10), nullable=False)
+    specifications = db.Column(db.String(10))
 
 # def init_db():
 #     db.create_all()
@@ -57,8 +57,10 @@ def add_resistor():
 def calculate():
     current = float(request.form['current'])
     connection_type = request.form['connection_type'] 
+    # Component.query.delete()
     total_power = circuit.calculate_total_power(current,connection_type)
-    components = Component.query.filter_by(type='Resistor').all()  
+    components = Component.query.filter_by(type='Resistor').all() 
+    # components = Component.query.all() 
     return render_template('result.html', total_power=total_power,components=components)
 
 @app.route('/calculate_series_resistance')
@@ -70,6 +72,19 @@ def calculate_series_resistance():
 def calculate_parallel_resistance():
     parallel_eq_resistance = circuit.calculate_parallel_resistance()
     return render_template('parallel_resistance.html', parallel_eq_resistance=parallel_eq_resistance)
+
+@app.route('/delete_all_components', methods=['POST'])
+def delete_all_components():
+    try:
+        # Delete all data from the Component table
+        Component.query.delete()
+        db.session.commit()
+        message = "All components deleted."
+    except Exception as e:
+        db.session.rollback()
+        message = f"Error deleting components: {str(e)}"
+    
+    return redirect(url_for('index', message=message))
 
 if __name__ == '__main__':
     app.run(debug=True)
